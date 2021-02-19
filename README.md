@@ -4,7 +4,7 @@ My solution to the Toy Robot Challenge using C#.
 
 ## Toy Robot Challenge Ground Rules
 
-See: [What is the Toy Robot Challenge](.\Documentation\WhatIsToyRobot.md)
+See: [What is the Toy Robot Challenge](./Documentation/WhatIsToyRobot.md)
 
 ### Variation Choices
 

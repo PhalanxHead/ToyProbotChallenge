@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ToyRobotChallenge.Domain
 {
@@ -15,17 +13,34 @@ namespace ToyRobotChallenge.Domain
         /// <summary>
         /// Creates a board with the default bounds set in the Domain Class.
         /// </summary>
-        public Board() { } 
+        public Board() { }
 
         /// <summary>
         /// Creates a rectangular board with the given upper bounds, and the default lower bounds set in the Domain Class.
+        /// If the given bounds are smaller than the default lower bounds, it assumes you meant to set the lower bound instead. The upper bound will remain as default.
+        /// For example, if default board size is (0,0) -> (5,5), and the input bounds are (-4, 4), the board will be of size (-4, 0) -> (5, 4).
         /// </summary>
         /// <param name="boardUpperBoundX">Upper bound for the X dimension of the board</param>
         /// <param name="boardUpperBoundY">Upper bound for the Y dimension of the board</param>
         public Board(int boardUpperBoundX, int boardUpperBoundY)
         {
-            BoardUpperBoundX = boardUpperBoundX;
-            BoardUpperBoundY = boardUpperBoundY;
+            if (boardUpperBoundX < BoardLowerBoundX)
+            {
+                BoardLowerBoundX = boardUpperBoundX;
+            }
+            else
+            {
+                BoardUpperBoundX = boardUpperBoundX;
+            }
+
+            if (boardUpperBoundX < BoardLowerBoundX)
+            {
+                BoardLowerBoundY = boardUpperBoundY;
+            }
+            else
+            {
+                BoardUpperBoundY = boardUpperBoundY;
+            }
         }
 
         /// <summary>
@@ -33,12 +48,14 @@ namespace ToyRobotChallenge.Domain
         /// </summary>
         /// <param name="boardUpperBoundX">Upper bound for the X dimension of the board</param>
         /// <param name="boardUpperBoundY">Upper bound for the Y dimension of the board</param>
+        /// <param name="boardLowerBoundX">Lower bound for the X dimension of the board</param>
+        /// <param name="boardLowerBoundY">Lower bound for the Y dimension of the board</param>
         public Board(int boardUpperBoundX, int boardUpperBoundY, int boardLowerBoundX, int boardLowerBoundY)
         {
-            BoardUpperBoundX = boardUpperBoundX;
-            BoardUpperBoundY = boardUpperBoundY;
-            BoardLowerBoundX = boardLowerBoundX;
-            BoardLowerBoundY = boardLowerBoundY;
+            BoardUpperBoundX = Math.Max(boardUpperBoundX, boardLowerBoundX);
+            BoardUpperBoundY = Math.Max(boardUpperBoundY, boardLowerBoundY);
+            BoardLowerBoundX = Math.Min(boardLowerBoundX, boardUpperBoundX);
+            BoardLowerBoundY = Math.Min(boardLowerBoundY, boardUpperBoundY);
         }
     }
 }

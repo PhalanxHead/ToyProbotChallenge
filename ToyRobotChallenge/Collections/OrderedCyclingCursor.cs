@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ToyRobotChallenge.Collections
 {
@@ -28,7 +27,7 @@ namespace ToyRobotChallenge.Collections
         private T[] _orderedArray { get; set; }
 
         /// <summary>
-        /// Number of elements in the collection. 
+        /// Number of elements in the collection.
         /// Also indicates the upper reference bound - ie. `_orderedArray[_arraySize]` should throw an ArgumentOutOfBoundsException.
         /// </summary>
         private int _arraySize { get; set; }
@@ -44,9 +43,9 @@ namespace ToyRobotChallenge.Collections
         /// </summary>
         /// <param name="orderedArray"></param>
         /// <exception cref="ArgumentNullException">Thrown when input array is null or empty</exception>
-        public OrderedCyclingCursor(T[] orderedArray) 
+        public OrderedCyclingCursor(T[] orderedArray)
         {
-            if(orderedArray == null || orderedArray.Length == 0)
+            if (orderedArray == null || orderedArray.Length == 0)
             {
                 throw new ArgumentNullException($"Cannot create collection of size 0");
             }
@@ -63,17 +62,17 @@ namespace ToyRobotChallenge.Collections
         /// </summary>
         /// <param name="orderedArray"></param>
         /// <exception cref="ArgumentNullException">Thrown when input array is null or empty</exception>
-        /// <exception cref="KeyNotFoundException">Throws KeyNotFoundException if startingElement is not present.</exception> 
+        /// <exception cref="KeyNotFoundException">Throws KeyNotFoundException if startingElement is not present.</exception>
         public OrderedCyclingCursor(T[] orderedArray, T startingElement)
         {
-            if(orderedArray == null || orderedArray.Length == 0)
+            if (orderedArray == null || orderedArray.Length == 0)
             {
                 throw new ArgumentNullException($"Cannot create collection of size 0");
             }
 
             _orderedArray = orderedArray;
             _arraySize = orderedArray.Length;
-            if(_orderedArray.Contains(startingElement))
+            if (_orderedArray.Contains(startingElement))
             {
                 _cursorPosition = Array.FindIndex(_orderedArray, x => x.Equals(startingElement));
             }
@@ -88,10 +87,10 @@ namespace ToyRobotChallenge.Collections
         /// </summary>
         /// <param name="newCurrentItem">The item to select as the current cursor value</param>
         /// <returns></returns>
-        /// <exception cref="KeyNotFoundException">Throws KeyNotFoundException if startingElement is not present.</exception> 
+        /// <exception cref="KeyNotFoundException">Throws KeyNotFoundException if startingElement is not present.</exception>
         public T SetCursorToElement(T newCurrentItem)
         {
-            if(_orderedArray.Contains(newCurrentItem))
+            if (_orderedArray.Contains(newCurrentItem))
             {
                 _cursorPosition = Array.FindIndex(_orderedArray, x => x.Equals(newCurrentItem));
                 return _orderedArray[_cursorPosition];
@@ -136,7 +135,7 @@ namespace ToyRobotChallenge.Collections
         /// <returns></returns>
         public T Next()
         {
-            if(_cursorPosition + 1 == _arraySize)
+            if (_cursorPosition + 1 == _arraySize)
             {
                 _cursorPosition = 0;
             }
@@ -153,7 +152,7 @@ namespace ToyRobotChallenge.Collections
         /// <returns></returns>
         public T Previous()
         {
-            if(_cursorPosition - 1 < 0)
+            if (_cursorPosition - 1 < 0)
             {
                 // Account for the fact that _orderedArray is 0-offset
                 _cursorPosition = _arraySize - 1;
@@ -172,7 +171,7 @@ namespace ToyRobotChallenge.Collections
         public T PeekNext()
         {
             var currentCursor = _cursorPosition;
-            if(currentCursor + 1 == _arraySize)
+            if (currentCursor + 1 == _arraySize)
             {
                 currentCursor = 0;
             }
@@ -190,7 +189,7 @@ namespace ToyRobotChallenge.Collections
         public T PeekPrevious()
         {
             var currentCursor = _cursorPosition;
-            if(currentCursor - 1 < 0)
+            if (currentCursor - 1 < 0)
             {
                 // Account for the fact that _orderedArray is 0-offset
                 currentCursor = _arraySize - 1;

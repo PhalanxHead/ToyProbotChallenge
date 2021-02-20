@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using static ToyRobotChallenge.Domain.Domain;
 
-namespace ToyRobotChallenge.Domain
+namespace ToyRobotChallenge.Interfaces
 {
     /// <summary>
     /// Defines the requirements for a Robot
     /// </summary>
-    interface IRobot
+    internal interface IRobot
     {
         /// <summary>
         /// Attempts to execute a given command. Returns true if successful.
@@ -23,11 +21,17 @@ namespace ToyRobotChallenge.Domain
         public string ToString();
 
         /// <summary>
-        /// Describes the Robot's full configuration including 
-        /// all the possible directions it can face, the bounds of its board, 
+        /// Describes the Robot's full configuration including
+        /// all the possible directions it can face, the bounds of its board,
         /// and its current state if it has been set.
         /// </summary>
         /// <returns></returns>
         public string ToStringFullDescription();
+
+        /// <summary>
+        /// Returns the robot's current state as a Tuple. X/Y/Facing will be default if the robot hasn't yet been placed.
+        /// </summary>
+        /// <returns></returns>
+        public (bool isPlaced, int currentX, int currentY, Direction currentFacing) DescribeSelfObjectively();
     }
 }

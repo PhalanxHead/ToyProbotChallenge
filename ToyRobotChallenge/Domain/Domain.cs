@@ -76,5 +76,10 @@
         /// The number of arguments for a valid PLACE command.
         /// </summary>
         public const int PLACE_COMMAND_ARGUMENT_COUNT_REQUIREMENT = 3;
+
+        /// <summary>
+        /// The string printed when trying to report on an un-placed robot
+        /// </summary>
+        public const string ROBOT_NOTE_PLACED_RESPONSE = "Robot has not yet been placed.";
     }
 }

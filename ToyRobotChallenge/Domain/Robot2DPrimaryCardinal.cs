@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using ToyRobotChallenge.Collections;
+using ToyRobotChallenge.Interfaces;
 using static ToyRobotChallenge.Domain.Domain;
 
 namespace ToyRobotChallenge.Domain
 {
-    internal class Robot2DPrimaryCardinal : IRobot
+    public class Robot2DPrimaryCardinal : IRobot
     {
         private readonly Board _Board;
 
         private readonly OrderedCyclingCursor<Direction> _CurrentFacing_ClockwiseCycle;
         private int _CurrentX;
         private int _CurrentY;
+
         /// <summary>
         /// Indicates if the robot has been placed yet.
         /// </summary>
@@ -25,6 +27,19 @@ namespace ToyRobotChallenge.Domain
         {
             _Board = board ?? throw new ArgumentNullException($"Cannot create a Robot from a Null Board!");
             _CurrentFacing_ClockwiseCycle = new OrderedCyclingCursor<Direction>(PrimaryCardinalDirections_ClockwiseOrder);
+        }
+
+        /// <inheritdoc/>
+        public (bool isPlaced, int currentX, int currentY, Direction currentFacing) DescribeSelfObjectively()
+        {
+            if (_IsPlaced)
+            {
+                return (_IsPlaced, _CurrentX, _CurrentY, _CurrentFacing_ClockwiseCycle.Current());
+            }
+            else
+            {
+                return (_IsPlaced, default, default, default);
+            }
         }
 
         /// <inheritdoc/>
@@ -51,7 +66,7 @@ namespace ToyRobotChallenge.Domain
             }
             else
             {
-                return $"Robot has not yet been placed.";
+                return ROBOT_NOTE_PLACED_RESPONSE;
             }
         }
 
@@ -108,8 +123,8 @@ namespace ToyRobotChallenge.Domain
             {
                 return false;
             }
-
         }
+
         /// <summary>
         /// Moves the robot forward one space if it can.
         /// Returns True if it moved.

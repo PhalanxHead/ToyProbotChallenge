@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ToyRobotChallenge
+﻿namespace ToyRobotChallenge
 {
     public class ToyRobotLogger
     {
@@ -12,11 +8,9 @@ namespace ToyRobotChallenge
         /// <param name="log">The string to print as part of the log</param>
         public static void LogDebug(string log)
         {
-
 #if DEBUG
             Console.WriteLine($"{DateTime.Now} | DEBUG | {log}");
 #endif
-
         }
     }
 }

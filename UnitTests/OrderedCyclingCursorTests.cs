@@ -8,7 +8,6 @@ namespace UnitTests
 {
     public class OrderedCyclingCursorTests
     {
-
         [Test]
         public void ConstructingWithNullArrayThrowsException()
         {
@@ -30,8 +29,8 @@ namespace UnitTests
         [Test]
         public void MovingToNonExistentElementThrowsException()
         {
-            Assert.Throws<KeyNotFoundException>(() => 
-                { 
+            Assert.Throws<KeyNotFoundException>(() =>
+                {
                     var testCollection = new OrderedCyclingCursor<Direction>(new Direction[] { Direction.NORTH, Direction.SOUTH });
                     testCollection.SetCursorToElement(Direction.EAST);
                 });
@@ -40,8 +39,8 @@ namespace UnitTests
         [Test]
         public void MovingToOutOfBoundsIndexThrowsException_AboveUpperBound()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => 
-                { 
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
                     var testCollection = new OrderedCyclingCursor<Direction>(new Direction[] { Direction.NORTH, Direction.SOUTH });
                     testCollection.SetCursorToOriginalArrayIndex(5);
                 });
@@ -50,8 +49,8 @@ namespace UnitTests
         [Test]
         public void MovingToOutOfBoundsIndexThrowsException_BelowLowerBound()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => 
-                { 
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
                     var testCollection = new OrderedCyclingCursor<Direction>(new Direction[] { Direction.NORTH, Direction.SOUTH });
                     testCollection.SetCursorToOriginalArrayIndex(-3);
                 });

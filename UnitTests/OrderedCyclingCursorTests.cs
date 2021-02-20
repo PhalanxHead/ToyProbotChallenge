@@ -1,17 +1,13 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using ToyRobotChallenge.Domain;
+using ToyRobotChallenge.Collections;
 using static ToyRobotChallenge.Domain.Domain;
 
 namespace UnitTests
 {
     public class OrderedCyclingCursorTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
 
         [Test]
         public void ConstructingWithNullArrayThrowsException()

@@ -16,7 +16,7 @@
         /// <summary>
         /// The collection of all valid directions in a meaningfully sorted order.
         /// </summary>
-        public static readonly Direction[] OrderedDirections =
+        public static readonly Direction[] CardinalDirections_ClockwiseOrder =
             new Direction[]
                 {
                     Direction.NORTH,
@@ -47,6 +47,8 @@
             };
 
         public static readonly string[] validCommand_ArgumentDelimiters = new string[] { " " };
+        public static readonly string[] validArgument_ArgumentDelimiters = new string[] { ",", ", " };
+        public const int PLACE_COMMAND_ARGUMENT_COUNT_REQUIREMENT = 3;
 
         public const string UseCaseInvariantArgument = "--nocase";
     }

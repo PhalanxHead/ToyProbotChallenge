@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ToyRobotChallenge.Domain
+namespace ToyRobotChallenge.Collections
 {
     /// <summary>
     /// Makes available a never-ending, ordered data structure.

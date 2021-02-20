@@ -8,8 +8,10 @@ namespace ToyRobotChallenge
     {
         static void Main(string[] args)
         {
-            bool isUsingCaseInsensitivity = args.Select(x => x.ToLower()).Contains(Domain.Domain.UseCaseInvariantArgument);
-            var CommandParser = new CommandParser(isUsingCaseInsensitivity);
+            // If `--nocase` is an argument, set commands to be case-insensitive.
+            // Default to case sensitivity.
+            bool areCommandsCaseSensitive = !args.Select(x => x.ToLower()).Contains(Domain.Domain.UseCaseInvariantArgument);
+            var CommandParser = new CommandParser(areCommandsCaseSensitive);
 
             string line = string.Empty;
             Console.WriteLine("Enter one or more Commands (press CTRL+C to exit):");
@@ -19,8 +21,18 @@ namespace ToyRobotChallenge
                 line = Console.ReadLine();
                 if (line != null)
                 {
-                    CommandParser.TryParseCommand(line, out string commandType);
-                    Console.WriteLine($"Parsed: {commandType}");
+                    if (CommandParser.TryParseCommand(line, out IBaseCommand commandType))
+                    {
+                        switch (commandType) {
+                            case PrintCommand cmd:
+                                Console.WriteLine($"{cmd.OutputString}");
+                                break;
+
+                            default:
+                                Console.WriteLine($"Parsed: {commandType}");
+                                break;
+                        }
+                    }
                 }
             };
         }

@@ -19,8 +19,18 @@ namespace ToyRobotChallenge
                 line = Console.ReadLine();
                 if (line != null)
                 {
-                    CommandParser.TryParseCommand(line, out string commandType);
-                    Console.WriteLine($"Parsed: {commandType}");
+                    if (CommandParser.TryParseCommand(line, out IBaseCommand commandType))
+                    {
+                        switch (commandType) {
+                            case PrintCommand cmd:
+                                Console.WriteLine($"{cmd.OutputString}");
+                                break;
+
+                            default:
+                                Console.WriteLine($"Parsed: {commandType}");
+                                break;
+                        }
+                    }
                 }
             };
         }

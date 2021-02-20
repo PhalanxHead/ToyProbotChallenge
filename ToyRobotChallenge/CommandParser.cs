@@ -15,37 +15,38 @@ namespace ToyRobotChallenge
             _stringComparisonMethod = isUsingCaseInsensitivity ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
         }
 
-        public bool TryParseCommand(string commandUnit, out string commandType)
+        public bool TryParseCommand(string commandUnit, out IBaseCommand commandType)
         {
             string cleanedCommand = commandUnit.Trim();
             switch (true)
             {
                 case bool _ when cleanedCommand.StartsWith(PLACE_COMMAND_PREFIX, _stringComparisonMethod):
-                    commandType = "Place";
+                    commandType = new PlaceCommand(0,0,Direction.NORTH);
                     return true;
 
                 case bool _ when cleanedCommand.StartsWith(MOVE_COMMAND_PREFIX, _stringComparisonMethod):
-                    commandType = "Move";
+                    commandType = new MoveCommand();
                     return true;
 
                 case bool _ when cleanedCommand.StartsWith(LEFT_COMMAND_PREFIX, _stringComparisonMethod):
-                    commandType = "Left";
+                    commandType = new LeftCommand();
                     return true;
 
                 case bool _ when cleanedCommand.StartsWith(RIGHT_COMMAND_PREFIX, _stringComparisonMethod):
-                    commandType = "Right";
+                    commandType = new RightCommand();
                     return true;
 
                 case bool _ when cleanedCommand.StartsWith(REPORT_COMMAND_PREFIX, _stringComparisonMethod):
-                    commandType = "Report";
+                    commandType = new ReportCommand();
                     return true;
 
                 case bool _ when cleanedCommand.StartsWith(PRINT_COMMAND_PREFIX, _stringComparisonMethod):
-                    commandType = "Print";
+                    commandType = new PrintCommand("Hello World!");
                     return true;
 
                 default:
-                    commandType = "InvalidCommand";
+                    Console.WriteLine($"Invalid Command: \"{cleanedCommand}\"");
+                    commandType = null;
                     return false;
             }
         }

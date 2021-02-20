@@ -16,7 +16,7 @@
         /// <summary>
         /// The collection of all valid directions in a meaningfully sorted order.
         /// </summary>
-        public static readonly Direction[] OrderedDirections =
+        public static readonly Direction[] CardinalDirections_ClockwiseOrder =
             new Direction[]
                 {
                     Direction.NORTH,

@@ -28,6 +28,66 @@ namespace UnitTests
         }
 
         [Test]
+        public void MovingToNonExistentElementThrowsException()
+        {
+            Assert.Throws<KeyNotFoundException>(() => 
+                { 
+                    var testCollection = new OrderedCyclingCursor<Direction>(new Direction[] { Direction.NORTH, Direction.SOUTH });
+                    testCollection.SetCursorToElement(Direction.EAST);
+                });
+        }
+
+        [Test]
+        public void MovingToOutOfBoundsIndexThrowsException_AboveUpperBound()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => 
+                { 
+                    var testCollection = new OrderedCyclingCursor<Direction>(new Direction[] { Direction.NORTH, Direction.SOUTH });
+                    testCollection.SetCursorToOriginalArrayIndex(5);
+                });
+        }
+
+        [Test]
+        public void MovingToOutOfBoundsIndexThrowsException_BelowLowerBound()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => 
+                { 
+                    var testCollection = new OrderedCyclingCursor<Direction>(new Direction[] { Direction.NORTH, Direction.SOUTH });
+                    testCollection.SetCursorToOriginalArrayIndex(-3);
+                });
+        }
+
+        [Test]
+        public void MovingToExistingElement_CurrentValueMutated()
+        {
+            int[] testOrderedArray = new int[] { 1, 1, 2, 3, 5, 8, 13 };
+            var testCollection = new OrderedCyclingCursor<int>(testOrderedArray);
+
+            Assert.AreEqual(testOrderedArray[0], testCollection.Current(), "Initial Positioning was not the first element!");
+
+            testCollection.SetCursorToElement(8);
+
+            Assert.AreEqual(testOrderedArray[5], testCollection.Current(), "Cursor Position after move was not on expected element!");
+            Assert.AreEqual(testOrderedArray[4], testCollection.PeekPrevious(), "Cursor Position Previous after move was not on expected element!");
+            Assert.AreEqual(testOrderedArray[6], testCollection.PeekNext(), "Cursor Position Next after move was not on expected element!");
+        }
+
+        [Test]
+        public void MovingToIndex_CurrentValueMutated()
+        {
+            int[] testOrderedArray = new int[] { 1, 1, 2, 3, 5, 8, 13 };
+            var testCollection = new OrderedCyclingCursor<int>(testOrderedArray);
+
+            Assert.AreEqual(testOrderedArray[0], testCollection.Current(), "Initial Positioning was not the first element!");
+
+            testCollection.SetCursorToOriginalArrayIndex(5);
+
+            Assert.AreEqual(testOrderedArray[5], testCollection.Current(), "Cursor Position after move was not on expected element!");
+            Assert.AreEqual(testOrderedArray[4], testCollection.PeekPrevious(), "Cursor Position Previous after move was not on expected element!");
+            Assert.AreEqual(testOrderedArray[6], testCollection.PeekNext(), "Cursor Position Next after move was not on expected element!");
+        }
+
+        [Test]
         public void SingleElementAlwaysReturnsCurrent()
         {
             var singleElement = 13;

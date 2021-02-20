@@ -2,9 +2,25 @@
 {
     public static class Domain
     {
-        public const int DEFAULT_BOARD_SIZE_X = 5;
-        public const int DEFAULT_BOARD_SIZE_Y = 5;
+        // Default Board Bounds
 
+        public const int DEFAULT_BOARD_UPPER_BOUND_X = 5;
+        public const int DEFAULT_BOARD_UPPER_BOUND_Y = 5;
+        public const int DEFAULT_BOARD_LOWER_BOUND_X = 0;
+        public const int DEFAULT_BOARD_LOWER_BOUND_Y = 0;
+
+        // End Default Board Bounds
+
+        // Command Line Arguments
+
+        public const string UseCaseInvariantArgument = "--nocase";
+        public const string SetBoardBoundsArgument = "--bounds";
+
+        // End Command Line Arguments
+
+        /// <summary>
+        /// Valid Directions in which a robot may face
+        /// </summary>
         public enum Direction
         {
             NORTH,
@@ -16,7 +32,7 @@
         /// <summary>
         /// The collection of all valid directions in a meaningfully sorted order.
         /// </summary>
-        public static readonly Direction[] CardinalDirections_ClockwiseOrder =
+        public static readonly Direction[] PrimaryCardinalDirections_ClockwiseOrder =
             new Direction[]
                 {
                     Direction.NORTH,
@@ -46,10 +62,19 @@
                 PRINT_COMMAND_PREFIX
             };
 
+        /// <summary>
+        /// Delimiters that may separate a command from an argument for it
+        /// </summary>
         public static readonly string[] validCommand_ArgumentDelimiters = new string[] { " " };
-        public static readonly string[] validArgument_ArgumentDelimiters = new string[] { ",", ", " };
-        public const int PLACE_COMMAND_ARGUMENT_COUNT_REQUIREMENT = 3;
 
-        public const string UseCaseInvariantArgument = "--nocase";
+        /// <summary>
+        /// Delimiters that may separate two arguments for a command.
+        /// </summary>
+        public static readonly string[] validArgument_ArgumentDelimiters = new string[] { ",", ", " };
+
+        /// <summary>
+        /// The number of arguments for a valid PLACE command.
+        /// </summary>
+        public const int PLACE_COMMAND_ARGUMENT_COUNT_REQUIREMENT = 3;
     }
 }

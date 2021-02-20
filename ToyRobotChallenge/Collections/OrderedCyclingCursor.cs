@@ -84,6 +84,44 @@ namespace ToyRobotChallenge.Collections
         }
 
         /// <summary>
+        /// Resets the cursor of the list to the first occurence of a specified element.
+        /// </summary>
+        /// <param name="newCurrentItem">The item to select as the current cursor value</param>
+        /// <returns></returns>
+        /// <exception cref="KeyNotFoundException">Throws KeyNotFoundException if startingElement is not present.</exception> 
+        public T SetCursorToElement(T newCurrentItem)
+        {
+            if(_orderedArray.Contains(newCurrentItem))
+            {
+                _cursorPosition = Array.FindIndex(_orderedArray, x => x.Equals(newCurrentItem));
+                return _orderedArray[_cursorPosition];
+            }
+            else
+            {
+                throw new KeyNotFoundException($"orderedArray does not contain an element {newCurrentItem}");
+            }
+        }
+
+        /// <summary>
+        /// Sets the cursor position to the nth element in the array used for construction.
+        /// </summary>
+        /// <param name="arrayIndex">The Index to set the cursor position to.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException">If the supplied index goes beyond the original array bounds</exception>
+        public T SetCursorToOriginalArrayIndex(int arrayIndex)
+        {
+            if (arrayIndex >= 0 && arrayIndex < _arraySize)
+            {
+                _cursorPosition = arrayIndex;
+                return _orderedArray[_cursorPosition];
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException($"The input index must be between 0 and {_arraySize}");
+            }
+        }
+
+        /// <summary>
         /// Returns the current element of the collection.
         /// </summary>
         /// <returns></returns>

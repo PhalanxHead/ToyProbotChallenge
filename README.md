@@ -12,11 +12,13 @@ See: [What is the Toy Robot Challenge](./Documentation/WhatIsToyRobot.md)
 
 As the challenge invites the developer to use either a file or STDIN, I've elected to follow the UNIX convention, and run via STDIN. Input files may be fed in using the `<` operator in most standard shells, including Windows Powershell.
 
-I have chosen to allow only one command per line, simply to make the task of delimiting commands more simple. With extra time, I may choose to implement a more flexible command delimitation system.
+I have chosen to allow only one command per line, simply to make the task of delimiting commands more simple. With extra time, I may choose to implement a more flexible command delimitation system or perhaps a grammar tree for parsing a list of commands that isn't so clearly delimited.
+
+Argument delimiters may take the form of both `',' and ', '`. IE: `PLACE 3,4, WEST` is a valid command.
 
 The user may specify certain parameters in the command line arguments with the following conventions:
 
-`--size x y` controls the initial size of the board. Defaults to 5 x 5 if not set.
+`--bounds xUpper yUpper [xLower yLower]` controls the initial dimensions of the board. Defaults to (0,0) -> (5,5) if not set. `xLower` and `yLower` are optional, but must be provided together. It is not required that Upper > Lower.
 
 `--nocase` indicates that commands can ignore the initial uppercase requirement of the challenge.
 

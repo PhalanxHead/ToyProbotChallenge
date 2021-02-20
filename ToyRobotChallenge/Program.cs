@@ -6,6 +6,8 @@ namespace ToyRobotChallenge
 {
     class Program
     {
+        const string UseageText = "Useage: ToyRobotChallenge.exe [--nocase] [--bounds xUpper yUpper [xLower yLower]]";
+
         static void Main(string[] args)
         {
             // If `--nocase` is an argument, set commands to be case-insensitive.
@@ -13,28 +15,33 @@ namespace ToyRobotChallenge
             bool areCommandsCaseSensitive = !args.Select(x => x.ToLower()).Contains(Domain.Domain.UseCaseInvariantArgument);
             var CommandParser = new CommandParser(areCommandsCaseSensitive);
 
-            string line = string.Empty;
+            var Board = new Board();
+            var Robot = new Robot2DPrimaryCardinal(Board);
+            ToyRobotLogger.LogDebug(Robot.ToStringFullDescription());
+
             Console.WriteLine("Enter one or more Commands (press CTRL+C to exit):");
             Console.WriteLine();
+
+            string line = string.Empty;
             while (line != null)
             {
                 line = Console.ReadLine();
-                if (line != null)
+                if (line != null && CommandParser.TryParseCommand(line, out IBaseCommand newCommand))
                 {
-                    if (CommandParser.TryParseCommand(line, out IBaseCommand commandType))
+                    switch (newCommand)
                     {
-                        switch (commandType) {
-                            case PrintCommand cmd:
-                                Console.WriteLine($"{cmd.OutputString}");
-                                break;
+                        case PrintCommand cmd:
+                            Console.WriteLine($"{cmd.OutputString}");
+                            break;
 
-                            default:
-                                Console.WriteLine($"Parsed: {commandType}");
-                                break;
-                        }
+                        default:
+                            ToyRobotLogger.LogDebug(newCommand.ToString());
+                            _ = Robot.ExecuteCommand(newCommand);
+                            ToyRobotLogger.LogDebug(Robot.ToString());
+                            break;
                     }
                 }
-            };
+            }
         }
     }
 }

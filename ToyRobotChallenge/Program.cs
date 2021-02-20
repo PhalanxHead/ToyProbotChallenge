@@ -1,40 +1,61 @@
 ﻿using System;
 using System.Linq;
 using ToyRobotChallenge.Domain;
+using ToyRobotChallenge.Interfaces;
 
 namespace ToyRobotChallenge
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private const string UseageText = "Useage: ToyRobotChallenge.exe [--nocase] [--bounds xUpper yUpper [xLower yLower]]";
+
+        private static void Main(string[] args)
+        {
+            StartRobot(args);
+        }
+
+        private static void StartRobot(string[] args)
         {
             // If `--nocase` is an argument, set commands to be case-insensitive.
             // Default to case sensitivity.
             bool areCommandsCaseSensitive = !args.Select(x => x.ToLower()).Contains(Domain.Domain.UseCaseInvariantArgument);
-            var CommandParser = new CommandParser(areCommandsCaseSensitive);
+            var CommandParser = new SingleCommandPerLineParser(areCommandsCaseSensitive);
 
+            var Board = new Board();
+            var Robot = new Robot2DPrimaryCardinal(Board);
+            ToyRobotLogger.LogDebug(Robot.ToStringFullDescription());
+
+            if (!Console.IsInputRedirected)
+            {
+                Console.WriteLine("Enter one or more Commands (press CTRL+C to exit):");
+                Console.WriteLine();
+            }
+
+            ReadCommandsUntilQuit(CommandParser, Robot);
+        }
+
+        private static void ReadCommandsUntilQuit(ICommandParser CommandParser, IRobot Robot)
+        {
             string line = string.Empty;
-            Console.WriteLine("Enter one or more Commands (press CTRL+C to exit):");
-            Console.WriteLine();
             while (line != null)
             {
                 line = Console.ReadLine();
-                if (line != null)
+                if (line != null && CommandParser.TryParseCommand(line, out IBaseCommand newCommand))
                 {
-                    if (CommandParser.TryParseCommand(line, out IBaseCommand commandType))
+                    switch (newCommand)
                     {
-                        switch (commandType) {
-                            case PrintCommand cmd:
-                                Console.WriteLine($"{cmd.OutputString}");
-                                break;
+                        case PrintCommand cmd:
+                            Console.WriteLine($"{cmd.OutputString}");
+                            break;
 
-                            default:
-                                Console.WriteLine($"Parsed: {commandType}");
-                                break;
-                        }
+                        default:
+                            ToyRobotLogger.LogDebug(newCommand.ToString());
+                            _ = Robot.ExecuteCommand(newCommand);
+                            ToyRobotLogger.LogDebug(Robot.ToString());
+                            break;
                     }
                 }
-            };
+            }
         }
     }
 }

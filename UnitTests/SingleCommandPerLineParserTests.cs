@@ -1,17 +1,16 @@
 using NUnit.Framework;
-using System;
 using ToyRobotChallenge;
 using static ToyRobotChallenge.Domain.Domain;
 
 namespace UnitTests
 {
-    public class CommandParserTests
+    public class SingleCommandPerLineParserTests
     {
         [Test]
         public void ParseCommand_StdcaseMode_FailsOnUnknownCommand()
         {
             string testCmd = "TEST_COMMAND";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -23,7 +22,7 @@ namespace UnitTests
         public void ParseCommand_CaseInsensitiveMode_FailsOnUnknownCommand()
         {
             string testCmd = "TEST_COMMAND";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -35,7 +34,7 @@ namespace UnitTests
         public void ParseMoveCommand_StdcaseMode_ReturnsMoveCommandType()
         {
             string testCmd = "MOVE";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -47,7 +46,7 @@ namespace UnitTests
         public void ParseMoveCommand_StdcaseMode_FailsOnInvalidCase_AllLowercase()
         {
             string testCmd = "move";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -59,7 +58,7 @@ namespace UnitTests
         public void ParseMoveCommand_StdcaseMode_FailsOnInvalidCase_RandomCase()
         {
             string testCmd = "mOVe";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -71,7 +70,7 @@ namespace UnitTests
         public void ParseMoveCommand_CaseInsensitiveMode_ReturnsMoveCommandType()
         {
             string testCmd = "MOVE";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -83,7 +82,7 @@ namespace UnitTests
         public void ParseMoveCommand_CaseInsensitiveMode_ReturnsMoveCommandType_AllLowercase()
         {
             string testCmd = "move";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -95,7 +94,7 @@ namespace UnitTests
         public void ParseMoveCommand_CaseInsensitiveMode_ReturnsMoveCommandType_RandomCase()
         {
             string testCmd = "mOVe";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -107,7 +106,7 @@ namespace UnitTests
         public void ParseLeftCommand_StdcaseMode_ReturnsLeftCommandType()
         {
             string testCmd = "LEFT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -119,7 +118,7 @@ namespace UnitTests
         public void ParseLeftCommand_StdcaseMode_FailsOnInvalidCase_AllLowercase()
         {
             string testCmd = "left";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -131,7 +130,7 @@ namespace UnitTests
         public void ParseLeftCommand_StdcaseMode_FailsOnInvalidCase_RandomCase()
         {
             string testCmd = "lEfT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -143,7 +142,7 @@ namespace UnitTests
         public void ParseLeftCommand_CaseInsensitiveMode_ReturnsLeftCommandType()
         {
             string testCmd = "LEFT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -155,7 +154,7 @@ namespace UnitTests
         public void ParseLeftCommand_CaseInsensitiveMode_ReturnsLeftCommandType_AllLowercase()
         {
             string testCmd = "left";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -167,7 +166,7 @@ namespace UnitTests
         public void ParseLeftCommand_CaseInsensitiveMode_ReturnsLeftCommandType_RandomCase()
         {
             string testCmd = "lEFT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -179,7 +178,7 @@ namespace UnitTests
         public void ParseRightCommand_StdcaseMode_ReturnsRightCommandType()
         {
             string testCmd = "RIGHT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -191,7 +190,7 @@ namespace UnitTests
         public void ParseRightCommand_StdcaseMode_FailsOnInvalidCase_AllLowercase()
         {
             string testCmd = "right";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -203,7 +202,7 @@ namespace UnitTests
         public void ParseRightCommand_StdcaseMode_FailsOnInvalidCase_RandomCase()
         {
             string testCmd = "rIGht";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -215,7 +214,7 @@ namespace UnitTests
         public void ParseRightCommand_CaseInsensitiveMode_ReturnsRightCommandType()
         {
             string testCmd = "RIGHT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -227,7 +226,7 @@ namespace UnitTests
         public void ParseRightCommand_CaseInsensitiveMode_ReturnsRightCommandType_AllLowercase()
         {
             string testCmd = "right";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -239,7 +238,7 @@ namespace UnitTests
         public void ParseRightCommand_CaseInsensitiveMode_ReturnsRightCommandType_RandomCase()
         {
             string testCmd = "rIgHT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -251,7 +250,7 @@ namespace UnitTests
         public void ParseReportCommand_StdcaseMode_ReturnsReportCommandType()
         {
             string testCmd = "REPORT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -263,7 +262,7 @@ namespace UnitTests
         public void ParseReportCommand_StdcaseMode_FailsOnInvalidCase_AllLowercase()
         {
             string testCmd = "report";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -275,7 +274,7 @@ namespace UnitTests
         public void ParseReportCommand_StdcaseMode_FailsOnInvalidCase_RandomCase()
         {
             string testCmd = "rePOrT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -287,7 +286,7 @@ namespace UnitTests
         public void ParseReportCommand_CaseInsensitiveMode_ReturnsReportCommandType()
         {
             string testCmd = "REPORT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -299,7 +298,7 @@ namespace UnitTests
         public void ParseReportCommand_CaseInsensitiveMode_ReturnsReportCommandType_AllLowercase()
         {
             string testCmd = "report";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -311,7 +310,7 @@ namespace UnitTests
         public void ParseReportCommand_CaseInsensitiveMode_ReturnsReportCommandType_RandomCase()
         {
             string testCmd = "rEpOrT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -324,7 +323,7 @@ namespace UnitTests
         {
             string testPhrase = "a TestPhrase";
             string testCmd = $"PRINT \"{testPhrase}\"";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -339,7 +338,7 @@ namespace UnitTests
         {
             string testPhrase = "a TestPhrase";
             string testCmd = $"print \"{testPhrase}\"";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -352,7 +351,7 @@ namespace UnitTests
         {
             string testPhrase = "a TestPhrase";
             string testCmd = $"pRiNt \"{testPhrase}\"";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -365,7 +364,7 @@ namespace UnitTests
         {
             string testPhrase = "August 22 is a Day!";
             string testCmd = $"PRINT \"{testPhrase}\"";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -380,7 +379,7 @@ namespace UnitTests
         {
             string testPhrase = "Toy Robot Challenge could go on forever!";
             string testCmd = $"print \"{testPhrase}\"";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -395,7 +394,7 @@ namespace UnitTests
         {
             string testPhrase = "a newer TestPhrase";
             string testCmd = $"pRiNT \"{testPhrase}\"";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -410,7 +409,7 @@ namespace UnitTests
         {
             string testPhrase = "a TestPhrase";
             string testCmd = $"PRINT \"{testPhrase}\" Random Gunk on the End";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -428,7 +427,7 @@ namespace UnitTests
             Direction startingDirection = Direction.EAST;
 
             string testCmd = $"PLACE {argX},{argY},{startingDirection}";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -448,7 +447,7 @@ namespace UnitTests
             Direction startingDirection = Direction.EAST;
 
             string testCmd = $"PLACE {argX}, {argY}, {startingDirection}";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -468,7 +467,7 @@ namespace UnitTests
             Direction startingDirection = Direction.EAST;
 
             string testCmd = $"place {argX}, {argY}, {startingDirection}";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -484,7 +483,7 @@ namespace UnitTests
             Direction startingDirection = Direction.EAST;
 
             string testCmd = $"pLaCe {argX}, {argY}, {startingDirection}";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -500,7 +499,7 @@ namespace UnitTests
             Direction startingDirection = Direction.EAST;
 
             string testCmd = $"PLACE {argX}, {argY}, {startingDirection.ToString().ToLower()}";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -515,7 +514,7 @@ namespace UnitTests
             int argY = 1;
 
             string testCmd = $"PLACE {argX}, {argY}, eAsT";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -529,7 +528,7 @@ namespace UnitTests
             int argX = 6;
 
             string testCmd = $"PLACE {argX}, EAST";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -544,7 +543,7 @@ namespace UnitTests
             int argY = 9;
 
             string testCmd = $"PLACE {argX}, {argY} ,";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -559,7 +558,7 @@ namespace UnitTests
             int argY = 9;
 
             string testCmd = $"PLACE {argX}, {argY} , Blargh";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -574,7 +573,7 @@ namespace UnitTests
             int argY = 9;
 
             string testCmd = $"PLACE {argX} , Blargh, {argY}";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -590,7 +589,7 @@ namespace UnitTests
             Direction startingDirection = Direction.WEST;
 
             string testCmd = $"place {argX}, {argY}, {startingDirection}";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -610,7 +609,7 @@ namespace UnitTests
             Direction startingDirection = Direction.NORTH;
 
             string testCmd = $"pLAce {argX}, {argY}, {startingDirection}";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -630,7 +629,7 @@ namespace UnitTests
             Direction startingDirection = Direction.WEST;
 
             string testCmd = $"PLACE {argX}, {argY}, {startingDirection.ToString().ToLower()}";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -650,7 +649,7 @@ namespace UnitTests
             Direction startingDirection = Direction.NORTH;
 
             string testCmd = $"PLACE {argX}, {argY}, nORth";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: false);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: false);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -668,7 +667,7 @@ namespace UnitTests
             int argX = 6;
 
             string testCmd = $"PLACE {argX}, 9.9, EAST";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -684,7 +683,7 @@ namespace UnitTests
             Direction startingDirection = Direction.EAST;
 
             string testCmd = $"PLACE {argX},{argY},{startingDirection} GarbageEndingData";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -704,7 +703,7 @@ namespace UnitTests
             Direction startingDirection = Direction.EAST;
 
             string testCmd = $"PLACE {argX},{argY},{startingDirection} Garbage,Ending Data";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -724,7 +723,7 @@ namespace UnitTests
             Direction startingDirection = Direction.EAST;
 
             string testCmd = $"PLACE {argX}, {argY}, {startingDirection} Garbage,Ending Data";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -743,7 +742,22 @@ namespace UnitTests
             int argY = 1;
 
             string testCmd = $"PLACE {argX},{argY},Garbage, Ending Data";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
+
+            var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
+
+            Assert.False(cmdParsedSuccess, $"Command \"{testCmd}\" was parsed when it should not have been!");
+            Assert.Null(command, "Returned Command type was not null when parsing failed.");
+        }
+
+        [Test]
+        public void ParsePlaceCommand_StdcaseMode_FailsOnSpaceAsArgumentDelimiter()
+        {
+            int argX = 1;
+            int argY = 1;
+
+            string testCmd = $"PLACE {argX} {argY} EAST";
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 
@@ -758,7 +772,7 @@ namespace UnitTests
             int argY = 1;
 
             string testCmd = $"PLACE {argX}, {argY}, Garbage, Ending Data";
-            var cmdParser = new CommandParser(isUsingCaseSensitivity: true);
+            var cmdParser = new SingleCommandPerLineParser(isUsingCaseSensitivity: true);
 
             var cmdParsedSuccess = cmdParser.TryParseCommand(testCmd, out IBaseCommand command);
 

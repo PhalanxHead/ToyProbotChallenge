@@ -78,7 +78,7 @@ namespace ToyRobotChallenge
     /// Used to attempt to place the robot at an X,Y Position facing in some direction.
     /// No validation is applied to the bounds of the command at creation.
     /// </summary>
-    struct PlaceCommand : IBaseCommand
+    public struct PlaceCommand : IBaseCommand
     {
         /// <summary>
         /// The X Position to attempt to place the robot on

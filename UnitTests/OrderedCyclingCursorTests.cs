@@ -8,10 +8,6 @@ namespace UnitTests
 {
     public class OrderedCyclingCursorTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
 
         [Test]
         public void ConstructingWithNullArrayThrowsException()

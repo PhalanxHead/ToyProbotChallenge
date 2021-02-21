@@ -19,6 +19,7 @@ namespace ToyRobotChallenge
         /// </summary>
         /// <param name="args">The input command line arguments</param>
         /// <returns></returns>
+        /// <exception cref="ArgumentException">Thrown if an incorrect number of arguments is provided or those arguments aren't integers</exception>
         public static Board ParseBoardSizeFromArgs(string[] args)
         {
             if (!args.Select(x => x.ToLower()).Contains(Domain.Domain.SetBoardBoundsArgument))
@@ -36,6 +37,9 @@ namespace ToyRobotChallenge
                 int yUpper = Domain.Domain.DEFAULT_BOARD_UPPER_BOUND_Y;
                 int yLower = Domain.Domain.DEFAULT_BOARD_LOWER_BOUND_Y;
 
+                // Remove non-integer arguments from the array
+                boundsArgs = boundsArgs.Where(x => int.TryParse(x, out _)).ToArray();
+                // Check the count of taken arguments and throws an exception if the argument count or type is incorrect.
                 switch (boundsArgs.Count())
                 {
                     case 2:

@@ -1,12 +1,10 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using ToyRobotChallenge.Domain;
 
 namespace UnitTests
 {
-    class BoardTests
+    internal class BoardTests
     {
         [Test]
         public void TestStardardBoardHasDefaultBounds()

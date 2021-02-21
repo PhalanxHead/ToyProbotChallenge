@@ -5,7 +5,7 @@ namespace ToyRobotChallenge.Interfaces
     /// <summary>
     /// Defines the requirements for a Robot
     /// </summary>
-    internal interface IRobot
+    public interface IRobot
     {
         /// <summary>
         /// Attempts to execute a given command. Returns true if successful.

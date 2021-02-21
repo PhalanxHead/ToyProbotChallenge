@@ -1,4 +1,6 @@
-PRINT "Expected Output: Robot has not yet been placed"
+PRINT "Expected Output: "
+PRINT "Robot has not yet been placed."
+PRINT "------"
 
 a;ksdfhuaer g
 adkfgjadlkjfghas

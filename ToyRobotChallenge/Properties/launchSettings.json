@@ -1,7 +1,8 @@
 {
   "profiles": {
     "ToyRobotChallenge": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "--nocase"
     }
   }
 }

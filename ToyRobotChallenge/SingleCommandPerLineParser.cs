@@ -42,7 +42,7 @@ namespace ToyRobotChallenge
         /// <returns>True if parsing is successful.</returns>
         public bool TryParseCommand(string commandUnit, out IBaseCommand commandType)
         {
-            if(string.IsNullOrWhiteSpace(commandUnit))
+            if (string.IsNullOrWhiteSpace(commandUnit))
             {
                 commandType = null;
                 return false;

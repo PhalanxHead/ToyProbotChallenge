@@ -1,4 +1,6 @@
-﻿namespace ToyRobotChallenge
+﻿using System;
+
+namespace ToyRobotChallenge
 {
     public class ToyRobotLogger
     {

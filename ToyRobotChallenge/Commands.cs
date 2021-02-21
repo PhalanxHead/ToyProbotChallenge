@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using static ToyRobotChallenge.Domain.Domain;
+﻿using static ToyRobotChallenge.Domain.Domain;
 
 namespace ToyRobotChallenge
 {
@@ -16,7 +13,7 @@ namespace ToyRobotChallenge
     /// <summary>
     /// Used to indicate that the robot should execute its Move command.
     /// </summary>
-    public struct MoveCommand : IBaseCommand 
+    public struct MoveCommand : IBaseCommand
     {
         public override string ToString()
         {
@@ -27,8 +24,8 @@ namespace ToyRobotChallenge
     /// <summary>
     /// Usesd to indicate that the robot should execute its Left command.
     /// </summary>
-    public struct LeftCommand : IBaseCommand 
-    { 
+    public struct LeftCommand : IBaseCommand
+    {
         public override string ToString()
         {
             return $"LEFT";
@@ -38,8 +35,8 @@ namespace ToyRobotChallenge
     /// <summary>
     /// Usesd to indicate that the robot should execute its Right command.
     /// </summary>
-    public struct RightCommand : IBaseCommand 
-    { 
+    public struct RightCommand : IBaseCommand
+    {
         public override string ToString()
         {
             return $"RIGHT";
@@ -49,7 +46,7 @@ namespace ToyRobotChallenge
     /// <summary>
     /// Used to indicate that the robot should execite its Report command.
     /// </summary>
-    public struct ReportCommand : IBaseCommand 
+    public struct ReportCommand : IBaseCommand
     {
         public override string ToString()
         {
@@ -68,6 +65,7 @@ namespace ToyRobotChallenge
         {
             OutputString = outputString;
         }
+
         public override string ToString()
         {
             return $"PRINT \"{OutputString}\"";

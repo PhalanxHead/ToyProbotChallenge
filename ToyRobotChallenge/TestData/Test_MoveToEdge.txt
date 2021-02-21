@@ -1,4 +1,6 @@
-PRINT "Expected: 5,2,EAST"
+PRINT "Expected: :
+PRINT "5,2,EAST"
+PRINT "-----"
 
 MOVE
 LEFT
